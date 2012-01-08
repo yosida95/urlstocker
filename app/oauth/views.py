@@ -4,15 +4,8 @@ from django.http import HttpResponseRedirect
 from django.conf import settings
 import tweepy
 
-from . import login as oauth_login
+from . import login as oauth_login, get_oauth_handler
 from .models import RequestToken, User
-
-
-def get_oauth_handler():
-    return tweepy.OAuthHandler(
-        settings.TWITTER_CONSUMER_TOKEN['key'],
-        settings.TWITTER_CONSUMER_TOKEN['secret'],
-    )
 
 
 def login(request):

@@ -2,9 +2,26 @@
 
 SESSION_KEY = '_twitter_logged_in'
 
+import tweepy
 from django.http import HttpResponseRedirect
 from django.conf import settings
 from .models import User
+
+
+def get_oauth_handler():
+    return tweepy.OAuthHandler(
+        settings.TWITTER_CONSUMER_TOKEN['key'],
+        settings.TWITTER_CONSUMER_TOKEN['secret'],
+    )
+
+
+def get_user(request):
+    user_id = request.session.get(SESSION_KEY, '')
+    q = User.objects.filter(id=user_id)
+    if q.count():
+        return q[0]
+
+    return None
 
 
 def login(request, user):

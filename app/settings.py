@@ -33,6 +33,8 @@ TIME_ZONE = 'Asia/Tokyo'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'ja-jp'
 
+DEFAULT_CHARSET = 'utf8'
+
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
@@ -111,6 +113,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.staticfiles',
     'app.oauth',
+    'app.favorite',
+    'app.my',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
