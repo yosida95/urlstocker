@@ -49,7 +49,7 @@ def authenticate(request):
 
             q = User.objects.filter(id=user_id)
             if 0 < q.count():
-                user = q.one()
+                user = q[0]
             else:
                 user = User()
                 user.set_id(user_id)
