@@ -1,8 +1,6 @@
-from django.conf.urls.defaults import patterns, include, url
+#-*- coding: utf-8 -*-
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('',
     url(r'login', 'oauth.views.login'),
