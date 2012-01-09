@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.conf import settings
 import tweepy
 

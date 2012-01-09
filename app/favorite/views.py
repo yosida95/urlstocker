@@ -4,7 +4,7 @@ import tweepy
 import re
 
 from oauth import login_required, get_oauth_handler, get_user
-from .models import Tweet, Favorite
+from .models import URL, URLProcess, Tweet, Favorite
 
 
 @login_required
@@ -32,11 +32,26 @@ def get_favorites(request):
             tweet.set_created_at(favorite.created_at)
             tweet.save()
 
+            for url in tweet.pick_urls():
+                _url = URLProcess(url)
+                _url.process()
+                q = URL.objects.filter(url=_url.get_url())
+
+                if 0 < q.count():
+                    url = q[0]
+                else:
+                    url = URL()
+                    url.set_url(_url.get_url())
+                    url.set_title()
+                    url.save()
+
+                tweet.urls.add(url)
+                tweet.save()
+
         if q_fav.filter(tweet=tweet).count() < 1:
             fav = Favorite()
             fav.set_user(user)
             fav.set_tweet(tweet)
-            tweet.save()
             fav.save()
         else:
             break
